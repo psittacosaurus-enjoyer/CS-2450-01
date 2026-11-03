@@ -1,0 +1,9 @@
+test_player.py:
+
+Test player:
+  ✓ The player moves correctly
+  ✓ The player jumps correctly
+  ✓ The player takes damage correctly
+  ✓ The score is added correctly
+
+============================== 4 passed in 0.05s ===============================
