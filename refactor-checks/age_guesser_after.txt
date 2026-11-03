@@ -1,0 +1,43 @@
+=== Older/younger narrowing then correct
+Are you: 63 ?
+Are you Older, Younger, or is this the correct age?
+Are you: 106 ?
+Are you Older, Younger, or is this the correct age?
+Are you: 98 ?
+Are you Older, Younger, or is this the correct age?
+Are you: 100 ?
+Are you Older, Younger, or is this the correct age?
+It took 4 guesses!
+
+=== Mixed capitalization
+Are you: 63 ?
+Are you Older, Younger, or is this the correct age?
+Are you: 106 ?
+Are you Older, Younger, or is this the correct age?
+Are you: 98 ?
+Are you Older, Younger, or is this the correct age?
+It took 3 guesses!
+
+=== Invalid answer then correct
+Are you: 63 ?
+Are you Older, Younger, or is this the correct age?
+Invalid reponse, please enter 'younger', 'older', or 'correct'
+Are you: 86 ?
+Are you Older, Younger, or is this the correct age?
+It took 2 guesses!
+
+=== Contradicting answers (keeps saying younger)
+Are you: 63 ?
+Are you Older, Younger, or is this the correct age?
+Are you: 43 ?
+Are you Older, Younger, or is this the correct age?
+Are you: 35 ?
+Are you Older, Younger, or is this the correct age?
+Are you: 11 ?
+Are you Older, Younger, or is this the correct age?
+Are you: 2 ?
+Are you Older, Younger, or is this the correct age?
+Are you: 1 ?
+Are you Older, Younger, or is this the correct age?
+Invalid response, you cannot be younger than 0 and older than 1
+
