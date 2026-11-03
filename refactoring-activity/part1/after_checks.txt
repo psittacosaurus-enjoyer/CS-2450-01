@@ -1,0 +1,67 @@
+=== Row win (X: 0,1,2)
+Tic-Tac-Toe
+
+ X | X | X 
+---+---+---
+ O | O | 5 
+---+---+---
+ 6 | 7 | 8 
+
+X wins!
+
+=== Column win (X: 0,3,6)
+Tic-Tac-Toe
+
+ X | O | O 
+---+---+---
+ X | 4 | 5 
+---+---+---
+ X | 7 | 8 
+
+X wins!
+
+=== Diagonal win (O: 0,4,8)
+Tic-Tac-Toe
+
+ O | X | X 
+---+---+---
+ X | O | 5 
+---+---+---
+ 6 | 7 | O 
+
+O wins!
+
+=== Anti-diagonal win (X: 2,4,6)
+Tic-Tac-Toe
+
+ O | O | X 
+---+---+---
+ 3 | X | 5 
+---+---+---
+ X | 7 | 8 
+
+X wins!
+
+=== Draw (board fills up)
+Tic-Tac-Toe
+
+ X | O | X 
+---+---+---
+ X | O | O 
+---+---+---
+ O | X | X 
+
+It's a draw!
+
+=== Invalid moves (occupied, out of range, not a number)
+Tic-Tac-Toe
+
+ O | X | 2 
+---+---+---
+ O | X | 5 
+---+---+---
+ 6 | X | 8 
+
+X wins!
+Error messages shown: ['Spot is taken or out of range. Try again.', 'Spot is taken or out of range. Try again.', 'Invalid input. Try again.']
+

@@ -1,80 +1,76 @@
 import os
 
+# Every set of 3 spots that counts as a win (spots are numbered 0-8, left to right, top to bottom)
+WINNING_LINES = [
+    (0, 1, 2), (3, 4, 5), (6, 7, 8),  # rows
+    (0, 3, 6), (1, 4, 7), (2, 5, 8),  # columns
+    (0, 4, 8), (2, 4, 6),             # diagonals
+]
+
+
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def show(b):
-    for r in range(3):
-        print(f" {b[r * 3]} | {b[r * 3 + 1]} | {b[r * 3 + 2]} ")
-        if r < 2:
+
+def show_board(board):
+    for row in range(3):
+        first_spot = row * 3
+        print(f" {board[first_spot]} | {board[first_spot + 1]} | {board[first_spot + 2]} ")
+        if row < 2:
             print("---+---+---")
 
-def winner(b):
 
-    if b[0] == 'X' and b[1] == 'X' and b[2] == 'X':
-        return 'X'
-    if b[3] == 'X' and b[4] == 'X' and b[5] == 'X':
-        return 'X'
-    if b[6] == 'X' and b[7] == 'X' and b[8] == 'X':
-        return 'X'
-    if b[0] == 'X' and b[3] == 'X' and b[6] == 'X':
-        return 'X'
-    if b[1] == 'X' and b[4] == 'X' and b[7] == 'X':
-        return 'X'
-    if b[2] == 'X' and b[5] == 'X' and b[8] == 'X':
-        return 'X'
-    if b[0] == 'X' and b[4] == 'X' and b[8] == 'X':
-        return 'X'
-    if b[2] == 'X' and b[4] == 'X' and b[6] == 'X':
-        return 'X'
+def show_game_screen(board):
+    """Clears the terminal and redraws the title and the board."""
+    clear_screen()
+    print("Tic-Tac-Toe\n")
+    show_board(board)
 
-    if b[0] == 'O' and b[1] == 'O' and b[2] == 'O':
-        return 'O'
-    if b[3] == 'O' and b[4] == 'O' and b[5] == 'O':
-        return 'O'
-    if b[6] == 'O' and b[7] == 'O' and b[8] == 'O':
-        return 'O'
-    if b[0] == 'O' and b[3] == 'O' and b[6] == 'O':
-        return 'O'
-    if b[1] == 'O' and b[4] == 'O' and b[7] == 'O':
-        return 'O'
-    if b[2] == 'O' and b[5] == 'O' and b[8] == 'O':
-        return 'O'
-    if b[0] == 'O' and b[4] == 'O' and b[8] == 'O':
-        return 'O'
-    if b[2] == 'O' and b[4] == 'O' and b[6] == 'O':
-        return 'O'
+
+def get_winner(board):
+    """Returns 'X' or 'O' if that player has three in a row, otherwise None."""
+    for player in ("X", "O"):
+        for line in WINNING_LINES:
+            if all(board[spot] == player for spot in line):
+                return player
     return None
 
+
 def play():
-    b = [str(i) for i in range(9)]
-    turn = "X"
-    while any(cell.isdigit() for cell in b):
-        clear_screen()
-        print("Tic-Tac-Toe\n")
-        show(b)
-        print(f"\n{turn}'s turn!")
+    # Empty spots hold their own number so the player can see which number to type
+    board = [str(spot) for spot in range(9)]
+    current_player = "X"
+
+    # Keep going while there is at least one open (numbered) spot left
+    while any(spot.isdigit() for spot in board):
+        show_game_screen(board)
+        print(f"\n{current_player}'s turn!")
+
         try:
-            move = int(input("Pick a spot (0-8): "))
+            chosen_spot = int(input("Pick a spot (0-8): "))
         except ValueError:
             print("Invalid input. Try again.")
             continue
 
-        if 0 <= move < 9 and b[move].isdigit():
-            b[move] = turn
-            winner_result = winner(b)
-            if winner_result:
-                clear_screen()
-                print("Tic-Tac-Toe\n")
-                show(b)
-                print(f"\n{winner_result} wins!")
-                return
-            turn = "O" if turn == "X" else "X"
-        else:
+        spot_is_open = 0 <= chosen_spot < 9 and board[chosen_spot].isdigit()
+        if not spot_is_open:
             print("Spot is taken or out of range. Try again.")
-    clear_screen()
-    print("Tic-Tac-Toe\n")
-    show(b)
+            continue
+
+        board[chosen_spot] = current_player
+
+        winning_player = get_winner(board)
+        if winning_player:
+            show_game_screen(board)
+            print(f"\n{winning_player} wins!")
+            return
+
+        current_player = "O" if current_player == "X" else "X"
+
+    # The loop only ends without a winner when the board is full
+    show_game_screen(board)
     print("\nIt's a draw!")
 
-play()
+
+if __name__ == "__main__":
+    play()
